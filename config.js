@@ -1,11 +1,3 @@
-
-
-  //  STEP 2 → CV File
-  //  ────────────────
-  //  Upload your CV as "Rohit_Anand_CV.pdf" to the root folder.
-  //  The Download CV button will work automatically.
-
-
 /* EmailJS Credentials */
 const EMAILJS_PUBLIC_KEY  = 'xLhN0XqTr4h7cr27W'; 
 const EMAILJS_SERVICE_ID  = 'service_be9feas';   
@@ -13,8 +5,6 @@ const EMAILJS_TEMPLATE_ID = 'template_w1cpff6';
 
 /* CV File Name */
 const CV_FILE_NAME = 'resume.pdf';
-
-/* Don't touch this madharchod  */
 const PORTFOLIO_CONFIG = {
   emailjs: {
     publicKey:  EMAILJS_PUBLIC_KEY,
