@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rohit Anand — Portfolio</title>
+  <meta name="description" content="Portfolio of Rohit Anand — B.Tech Student & Full Stack Developer" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ⚙️ SETUP BANNER -->
+  <div class="setup-banner" id="setupBanner">
+    <div class="setup-banner-inner">
+      <span class="setup-icon"><i class="fas fa-screwdriver-wrench"></i></span>
+      <div class="setup-text">
+        <strong>Quick Setup Required</strong>
+        <span>Add your EmailJS keys &amp; CV file to make this portfolio fully live.
+          <a href="#" id="setupGuideBtn">View Setup Guide →</a>
+        </span>
+      </div>
+      <button class="setup-close" id="setupClose" aria-label="Close"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
+
+  <!-- ⚙️ SETUP MODAL -->
+  <!-- <div class="modal-overlay" id="setupModal">
+    <div class="modal-box glass-card">
+      <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+      <h2 class="modal-title"><i class="fas fa-rocket"></i> Activate Your Portfolio</h2>
+      <p class="modal-intro">Follow these 2 simple steps to make email &amp; CV download fully functional.</p>
+
+      <div class="setup-steps"> -->
+
+        <!-- Step 1: EmailJS -->
+      <!--  <div class="setup-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3><i class="fas fa-envelope"></i> Set Up EmailJS (Free — Real Email Delivery)</h3>
+            <ol class="step-list">
+              <li>Go to <a href="https://www.emailjs.com" target="_blank">emailjs.com</a> and create a <strong>free account</strong></li>
+              <li>Click <strong>Email Services</strong> → Add New Service → connect your Gmail / Outlook</li>
+              <li>Click <strong>Email Templates</strong> → Create New Template. Use these exact variables:<br/>
+                <code>{{from_name}}</code> &nbsp;<code>{{from_email}}</code> &nbsp;<code>{{subject}}</code> &nbsp;<code>{{message}}</code>
+              </li>
+              <li>Copy your <strong>Service ID</strong>, <strong>Template ID</strong> and <strong>Public Key</strong></li>
+              <li>Open <code>js/config.js</code> and paste the three values in.</li>
+            </ol>
+            <div class="code-block">
+              <pre>// js/config.js
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';</pre>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- Step 2: CV Upload -->
+        <!--  <div class="setup-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3><i class="fas fa-file-pdf"></i> Add Your CV PDF</h3>
+            <ol class="step-list">
+              <li>Name your CV file exactly: <code>Rohit_Anand_CV.pdf</code></li>
+              <li>Upload it to the <strong>root folder</strong> of this project (same level as <code>index.html</code>)</li>
+              <li>The Download CV button will work automatically — no code change needed!</li>
+            </ol>
+            <div class="cv-status" id="cvStatus">
+              <i class="fas fa-info-circle"></i>
+              CV file not yet uploaded. Add <code>Rohit_Anand_CV.pdf</code> to the root folder.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="modalDone"><i class="fas fa-check-circle"></i> Got It, Close</button>
+      </div>
+    </div>
+  </div> -->
+
+  <!--Quick setup -->
+
+  <!-- Loader -->
+  <div class="loader-wrapper" id="loaderWrapper">
+    <div class="loader-inner">
+      <div class="loader-logo">RA</div>
+      <div class="loader-bar"><div class="loader-progress" id="loaderProgress"></div></div>
+      <p class="loader-text">Loading Portfolio…</p>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a class="nav-logo" href="#hero">
+        <span class="logo-bracket">&lt;</span>RA<span class="logo-bracket">/&gt;</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#experience" class="nav-link">Journey</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn btn-outline nav-cta">Hire Me</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ───────────────────── HERO ───────────────────── -->
+  <section class="hero" id="hero">
+    <canvas id="particleCanvas"></canvas>
+    <div class="hero-bg-glow glow-1"></div>
+    <div class="hero-bg-glow glow-2"></div>
+    <div class="hero-content">
+      <div class="hero-badge reveal-up">
+        <span class="badge-dot"></span>Available for Opportunities
+      </div>
+      <h1 class="hero-title reveal-up">
+        Hi, I'm <span class="gradient-text">Rohit Anand</span>
+      </h1>
+      <p class="hero-subtitle reveal-up">B.Tech Student &nbsp;|&nbsp; Full Stack Developer</p>
+      <div class="hero-typing reveal-up">
+        <span class="typing-prefix">$ &gt;&nbsp;</span>
+        <span class="typing-text" id="typingText"></span>
+        <span class="typing-cursor">|</span>
+      </div>
+      <div class="hero-cta reveal-up">
+        <a href="#projects" class="btn btn-primary">
+          <i class="fas fa-rocket"></i> View Projects
+        </a>
+        <a href="#contact" class="btn btn-ghost">
+          <i class="fas fa-paper-plane"></i> Contact Me
+        </a>
+      </div>
+      <div class="hero-scroll-hint reveal-up">
+        <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+        <span>Scroll to explore</span>
+      </div>
+    </div>
+    <!-- Floating tech badges -->
+    <div class="float-badge fb-1 glass-card"><i class="fab fa-react"></i> React</div>
+    <div class="float-badge fb-2 glass-card"><i class="fab fa-node-js"></i> Node.js</div>
+    <div class="float-badge fb-3 glass-card"><i class="fab fa-python"></i> Python</div>
+    <div class="float-badge fb-4 glass-card"><i class="fas fa-code"></i> C++</div>
+  </section>
+
+  <!-- ───────────────────── ABOUT ───────────────────── -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Who Am I</span>
+        <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="about-grid">
+        <div class="about-image-wrap reveal-left">
+          <div class="about-img-frame">
+            <div class="about-img-placeholder">
+              <span class="about-initials">RA</span>
+              <div class="about-img-ring ring-1"></div>
+              <div class="about-img-ring ring-2"></div>
+              <div class="about-img-ring ring-3"></div>
+            </div>
+            <div class="about-img-glow"></div>
+          </div>
+          <!-- Stats -->
+          <div class="about-stats">
+            <div class="stat-card glass-card">
+              <span class="stat-num" data-target="10">0</span><span class="stat-num">+</span>
+              <span class="stat-label">Projects</span>
+            </div>
+            <div class="stat-card glass-card">
+              <span class="stat-num" data-target="5">0</span><span class="stat-num">+</span>
+              <span class="stat-label">Technologies</span>
+            </div>
+            <div class="stat-card glass-card">
+              <span class="stat-num" data-target="3">0</span><span class="stat-num">+</span>
+              <span class="stat-label">Years Learning</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-content reveal-right">
+          <h3 class="about-heading">Passionate Developer &amp; Problem Solver</h3>
+          <p class="about-text">
+            I'm <strong>Rohit Anand</strong>, a B.Tech Computer Science student with a deep passion
+            for building elegant, real-world software solutions. I thrive at the intersection
+            of <span class="highlight">creativity and logic</span>, constantly exploring new
+            technologies to push my limits.
+          </p>
+          <p class="about-text">
+            My curiosity drives me to deconstruct complex problems, prototype fast, and ship
+            quality code. From competitive programming in <span class="highlight">C++</span> to
+            crafting full-stack web applications with <span class="highlight">React &amp; Node.js</span>,
+            I love the entire development journey.
+          </p>
+          <p class="about-text">
+            When I'm not coding, you'll find me diving into open-source projects, reading tech
+            blogs, or participating in hackathons — always looking for the next challenge to conquer.
+          </p>
+          <div class="about-traits">
+            <span class="trait-badge"><i class="fas fa-lightbulb"></i> Problem Solver</span>
+            <span class="trait-badge"><i class="fas fa-brain"></i> Quick Learner</span>
+            <span class="trait-badge"><i class="fas fa-users"></i> Team Player</span>
+            <span class="trait-badge"><i class="fas fa-fire"></i> Passionate Coder</span>
+          </div>
+          <a href="resume.pdf" class="btn btn-primary mt-20" id="downloadCv" download="resume.pdf">
+            <i class="fas fa-download"></i> Download CV
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── SKILLS ───────────────────── -->
+  <section class="section section-dark" id="skills">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">What I Know</span>
+        <h2 class="section-title">My <span class="gradient-text">Skills</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid">
+
+        <!-- C++ -->
+        <div class="skill-card glass-card reveal-up" data-delay="0">
+          <div class="skill-icon-wrap" style="--icon-color:#00b4d8">
+            <i class="fas fa-code skill-icon"></i>
+            <div class="skill-icon-glow"></div>
+          </div>
+          <h3 class="skill-name">C++</h3>
+          <p class="skill-desc">Data Structures, Algorithms &amp; Competitive Programming</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" data-width="88">
+              <div class="skill-bar-fill" style="--bar-color:#00b4d8"></div>
+            </div>
+            <span class="skill-percent">88%</span>
+          </div>
+        </div>
+
+        <!-- JavaScript -->
+        <div class="skill-card glass-card reveal-up" data-delay="100">
+          <div class="skill-icon-wrap" style="--icon-color:#f7df1e">
+            <i class="fab fa-js-square skill-icon"></i>
+            <div class="skill-icon-glow"></div>
+          </div>
+          <h3 class="skill-name">JavaScript</h3>
+          <p class="skill-desc">ES6+, Async/Await, DOM Manipulation &amp; APIs</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" data-width="85">
+              <div class="skill-bar-fill" style="--bar-color:#f7df1e"></div>
+            </div>
+            <span class="skill-percent">85%</span>
+          </div>
+        </div>
+
+        <!-- Python -->
+        <div class="skill-card glass-card reveal-up" data-delay="200">
+          <div class="skill-icon-wrap" style="--icon-color:#3776ab">
+            <i class="fab fa-python skill-icon"></i>
+            <div class="skill-icon-glow"></div>
+          </div>
+          <h3 class="skill-name">Python</h3>
+          <p class="skill-desc">Scripting, Automation &amp; Data Structures</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" data-width="80">
+              <div class="skill-bar-fill" style="--bar-color:#3776ab"></div>
+            </div>
+            <span class="skill-percent">80%</span>
+          </div>
+        </div>
+
+        <!-- Frontend -->
+        <div class="skill-card glass-card reveal-up" data-delay="300">
+          <div class="skill-icon-wrap" style="--icon-color:#61dafb">
+            <i class="fab fa-react skill-icon"></i>
+            <div class="skill-icon-glow"></div>
+          </div>
+          <h3 class="skill-name">Frontend</h3>
+          <p class="skill-desc">HTML5, CSS3, React.js &amp; Responsive Design</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" data-width="87">
+              <div class="skill-bar-fill" style="--bar-color:#61dafb"></div>
+            </div>
+            <span class="skill-percent">87%</span>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="skill-card glass-card reveal-up" data-delay="400">
+          <div class="skill-icon-wrap" style="--icon-color:#68d391">
+            <i class="fab fa-node-js skill-icon"></i>
+            <div class="skill-icon-glow"></div>
+          </div>
+          <h3 class="skill-name">Backend</h3>
+          <p class="skill-desc">Node.js, Express.js &amp; REST API Development</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" data-width="78">
+              <div class="skill-bar-fill" style="--bar-color:#68d391"></div>
+            </div>
+            <span class="skill-percent">78%</span>
+          </div>
+        </div>
+
+        <!-- SQL / Databases -->
+        <div class="skill-card glass-card reveal-up" data-delay="500">
+          <div class="skill-icon-wrap" style="--icon-color:#a78bfa">
+            <i class="fas fa-database skill-icon"></i>
+            <div class="skill-icon-glow"></div>
+          </div>
+          <h3 class="skill-name">SQL / Databases</h3>
+          <p class="skill-desc">MySQL, MongoDB &amp; Database Design Principles</p>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar" data-width="75">
+              <div class="skill-bar-fill" style="--bar-color:#a78bfa"></div>
+            </div>
+            <span class="skill-percent">75%</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tech Stack Logos Row -->
+      <div class="tech-logos reveal-up">
+        <span class="tech-logo-label">Also familiar with:</span>
+        <div class="tech-logos-row">
+          <span class="tech-pill"><i class="fab fa-git-alt"></i> Git</span>
+          <span class="tech-pill"><i class="fab fa-github"></i> GitHub</span>
+          <span class="tech-pill"><i class="fab fa-linux"></i> Linux</span>
+          <span class="tech-pill"><i class="fas fa-wind"></i> Tailwind</span>
+          <span class="tech-pill"><i class="fab fa-docker"></i> Docker</span>
+          <span class="tech-pill"><i class="fab fa-aws"></i> AWS Basics</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── PROJECTS ───────────────────── -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">What I've Built</span>
+        <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="project-filters reveal-up">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+        <button class="filter-btn" data-filter="cpp">C++ / DSA</button>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid">
+
+        <!-- Project 1 -->
+        <div class="project-card glass-card tilt-card reveal-up" data-category="fullstack" data-delay="0">
+          <div class="project-img-wrap">
+            <div class="project-img-placeholder" style="--proj-color:#00b4d8">
+              <i class="fas fa-shopping-cart proj-icon"></i>
+            </div>
+            <div class="project-overlay">
+              <a href="#" class="proj-overlay-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-badge">Full Stack</div>
+            <h3 class="project-title">ShopEase — E-Commerce Platform</h3>
+            <p class="project-desc">A full-featured e-commerce web app with user auth, product listings, cart management, and payment integration built with React &amp; Node.js.</p>
+            <div class="project-tech">
+              <span>React</span><span>Node.js</span><span>MongoDB</span><span>Stripe</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="btn btn-sm btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+              <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-rocket"></i> Live Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card glass-card tilt-card reveal-up" data-category="web" data-delay="100">
+          <div class="project-img-wrap">
+            <div class="project-img-placeholder" style="--proj-color:#a78bfa">
+              <i class="fas fa-tasks proj-icon"></i>
+            </div>
+            <div class="project-overlay">
+              <a href="#" class="proj-overlay-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-badge">Web App</div>
+            <h3 class="project-title">TaskFlow — Project Manager</h3>
+            <p class="project-desc">A productivity app with Kanban boards, drag-and-drop tasks, real-time collaboration, and dark/light mode toggle.</p>
+            <div class="project-tech">
+              <span>React</span><span>Firebase</span><span>CSS3</span><span>DnD</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="btn btn-sm btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+              <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-rocket"></i> Live Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card glass-card tilt-card reveal-up" data-category="fullstack" data-delay="200">
+          <div class="project-img-wrap">
+            <div class="project-img-placeholder" style="--proj-color:#f472b6">
+              <i class="fas fa-comments proj-icon"></i>
+            </div>
+            <div class="project-overlay">
+              <a href="#" class="proj-overlay-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-badge">Full Stack</div>
+            <h3 class="project-title">ChatSphere — Real-Time Chat</h3>
+            <p class="project-desc">A real-time messaging application with Socket.io, JWT authentication, rooms, typing indicators, and message history.</p>
+            <div class="project-tech">
+              <span>Node.js</span><span>Socket.io</span><span>React</span><span>JWT</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="btn btn-sm btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+              <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-rocket"></i> Live Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card glass-card tilt-card reveal-up" data-category="cpp" data-delay="300">
+          <div class="project-img-wrap">
+            <div class="project-img-placeholder" style="--proj-color:#34d399">
+              <i class="fas fa-brain proj-icon"></i>
+            </div>
+            <div class="project-overlay">
+              <a href="#" class="proj-overlay-btn"><i class="fas fa-external-link-alt"></i> View Code</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-badge">C++ / DSA</div>
+            <h3 class="project-title">AlgoViz — DSA Visualizer</h3>
+            <p class="project-desc">Interactive visualizer for sorting algorithms (merge, quick, heap) and graph traversals (BFS, DFS) implemented in C++ and visualized on the web.</p>
+            <div class="project-tech">
+              <span>C++</span><span>JavaScript</span><span>Canvas API</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="btn btn-sm btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+              <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-rocket"></i> Live Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card glass-card tilt-card reveal-up" data-category="web" data-delay="400">
+          <div class="project-img-wrap">
+            <div class="project-img-placeholder" style="--proj-color:#fb923c">
+              <i class="fas fa-cloud-sun proj-icon"></i>
+            </div>
+            <div class="project-overlay">
+              <a href="#" class="proj-overlay-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-badge">Web App</div>
+            <h3 class="project-title">SkyCast — Weather Dashboard</h3>
+            <p class="project-desc">A beautiful weather dashboard consuming OpenWeatherMap API, with location-based data, 5-day forecast, and animated weather icons.</p>
+            <div class="project-tech">
+              <span>JavaScript</span><span>REST API</span><span>CSS3</span><span>Chart.js</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="btn btn-sm btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+              <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-rocket"></i> Live Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="project-card glass-card tilt-card reveal-up" data-category="fullstack" data-delay="500">
+          <div class="project-img-wrap">
+            <div class="project-img-placeholder" style="--proj-color:#818cf8">
+              <i class="fas fa-blog proj-icon"></i>
+            </div>
+            <div class="project-overlay">
+              <a href="#" class="proj-overlay-btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-badge">Full Stack</div>
+            <h3 class="project-title">DevLog — Developer Blog CMS</h3>
+            <p class="project-desc">A markdown-powered developer blog platform with categories, search, tags, comment system, and an admin dashboard.</p>
+            <div class="project-tech">
+              <span>Next.js</span><span>PostgreSQL</span><span>Prisma</span><span>MDX</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="btn btn-sm btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+              <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-rocket"></i> Live Demo</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── EXPERIENCE / LEARNING JOURNEY ───────────────────── -->
+  <section class="section section-dark" id="experience">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">My Path</span>
+        <h2 class="section-title">Learning <span class="gradient-text">Journey</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="timeline">
+
+        <div class="timeline-item reveal-up" data-delay="0">
+          <div class="timeline-dot">
+            <i class="fas fa-flag"></i>
+          </div>
+          <div class="timeline-content glass-card">
+            <div class="timeline-date">2021</div>
+            <h3 class="timeline-title">Started B.Tech — CS Engineering</h3>
+            <p class="timeline-desc">Enrolled in B.Tech Computer Science. Began learning programming fundamentals: C, C++, and core CS subjects like OS, DBMS, CN.</p>
+            <div class="timeline-tags">
+              <span>C</span><span>C++</span><span>DBMS</span><span>OS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item right reveal-up" data-delay="100">
+          <div class="timeline-dot">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <div class="timeline-content glass-card">
+            <div class="timeline-date">2022</div>
+            <h3 class="timeline-title">Web Development Deep Dive</h3>
+            <p class="timeline-desc">Mastered HTML, CSS, and JavaScript. Built first full projects. Started exploring React.js and modern frontend architecture.</p>
+            <div class="timeline-tags">
+              <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>React</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-up" data-delay="200">
+          <div class="timeline-dot">
+            <i class="fas fa-server"></i>
+          </div>
+          <div class="timeline-content glass-card">
+            <div class="timeline-date">2022 — 2023</div>
+            <h3 class="timeline-title">Full Stack &amp; Backend Development</h3>
+            <p class="timeline-desc">Learned Node.js, Express, MongoDB, SQL. Built REST APIs and full-stack applications. Explored authentication and deployment strategies.</p>
+            <div class="timeline-tags">
+              <span>Node.js</span><span>Express</span><span>MongoDB</span><span>SQL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item right reveal-up" data-delay="300">
+          <div class="timeline-dot">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <div class="timeline-content glass-card">
+            <div class="timeline-date">2023</div>
+            <h3 class="timeline-title">Competitive Programming &amp; DSA</h3>
+            <p class="timeline-desc">Solved 300+ problems on LeetCode and Codeforces. Mastered DSA — trees, graphs, DP, greedy, and advanced algorithms in C++.</p>
+            <div class="timeline-tags">
+              <span>LeetCode</span><span>DSA</span><span>C++</span><span>Codeforces</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-up" data-delay="400">
+          <div class="timeline-dot">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <div class="timeline-content glass-card">
+            <div class="timeline-date">2024 — Present</div>
+            <h3 class="timeline-title">Advanced Projects &amp; Open Source</h3>
+            <p class="timeline-desc">Building production-quality full-stack projects. Contributing to open source. Exploring DevOps (Docker, CI/CD) and cloud fundamentals.</p>
+            <div class="timeline-tags">
+              <span>Docker</span><span>CI/CD</span><span>Open Source</span><span>Cloud</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item right reveal-up" data-delay="500">
+          <div class="timeline-dot glow-dot">
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="timeline-content glass-card active-timeline">
+            <div class="timeline-date">2025 — Future</div>
+            <h3 class="timeline-title">Currently Exploring</h3>
+            <p class="timeline-desc">Diving deeper into AI/ML integration, system design, microservices, and preparing for industry roles as a Full Stack Engineer.</p>
+            <div class="timeline-tags">
+              <span>AI/ML</span><span>System Design</span><span>Microservices</span><span>Leadership</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── CONTACT ───────────────────── -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Get In Touch</span>
+        <h2 class="section-title">Contact <span class="gradient-text">Me</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info reveal-left">
+          <h3 class="contact-heading">Let's Build Something Amazing</h3>
+          <p class="contact-subtext">
+            I'm always open to internship opportunities, freelance projects, collaborations,
+            and interesting conversations. Drop me a message — I typically respond within 24 hours!
+          </p>
+          <div class="contact-links">
+            <a href="mailto:rohit.anand.dev@gmail.com" class="contact-link-card glass-card">
+              <div class="clc-icon" style="--link-color:#00b4d8"><i class="fas fa-envelope"></i></div>
+              <div class="clc-text">
+                <span class="clc-label">Email</span>
+                <span class="clc-value">rohit.anand.dev@gmail.com</span>
+              </div>
+              <i class="fas fa-arrow-right clc-arrow"></i>
+            </a>
+            <a href="https://github.com/Devrohitanand" target="_blank" class="contact-link-card glass-card">
+              <div class="clc-icon" style="--link-color:#a78bfa"><i class="fab fa-github"></i></div>
+              <div class="clc-text">
+                <span class="clc-label">GitHub</span>
+                <span class="clc-value">github.com/rohitanand</span>
+              </div>
+              <i class="fas fa-arrow-right clc-arrow"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/rohit-anand-619b4b3bb/" target="_blank" class="contact-link-card glass-card">
+              <div class="clc-icon" style="--link-color:#0077b5"><i class="fab fa-linkedin"></i></div>
+              <div class="clc-text">
+                <span class="clc-label">LinkedIn</span>
+                <span class="clc-value">linkedin.com/in/rohitanand</span>
+              </div>
+              <i class="fas fa-arrow-right clc-arrow"></i>
+            </a>
+          </div>
+        </div>
+        <div class="contact-form-wrap reveal-right">
+          <form class="contact-form glass-card" id="contactForm">
+            <div class="form-group">
+              <label for="cfName">Your Name</label>
+              <div class="input-wrap">
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" id="cfName" placeholder="e.g. Priya Sharma" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cfEmail">Email Address</label>
+              <div class="input-wrap">
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" id="cfEmail" placeholder="you@example.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cfSubject">Subject</label>
+              <div class="input-wrap">
+                <i class="fas fa-tag input-icon"></i>
+                <input type="text" id="cfSubject" placeholder="Internship Opportunity / Collaboration" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cfMessage">Message</label>
+              <div class="input-wrap textarea-wrap">
+                <i class="fas fa-comment-dots input-icon input-icon-top"></i>
+                <textarea id="cfMessage" rows="5" placeholder="Your message here…" required></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" id="formSubmitBtn">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+            <div class="form-success" id="formSuccess">
+              <i class="fas fa-check-circle"></i> Message sent! I'll get back to you soon.
+            </div>
+            <div class="form-error" id="formError">
+              <i class="fas fa-exclamation-triangle"></i> Something went wrong. Please try again.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── FOOTER ───────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <a class="nav-logo" href="#hero">
+          <span class="logo-bracket">&lt;</span>RA<span class="logo-bracket">/&gt;</span>
+        </a>
+        <div class="footer-socials">
+          <a href="https://github.com/rohitanand" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com/in/rohitanand" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="mailto:rohit.anand@example.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://twitter.com/rohitanand" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-nav">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Journey</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-bottom">
+        <p>Designed &amp; Built by <span class="gradient-text">Rohit Anand</span> &copy; 2025</p>
+        <p class="footer-love">Made with <i class="fas fa-heart" style="color:#f472b6"></i> and lots of ☕</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- Config (EDIT THIS FILE with your EmailJS keys) -->
+  <script src="js/config.js"></script>
+  <!-- Main JS -->
+  <script src="js/main.js"></script>
+</body>
+</html>
